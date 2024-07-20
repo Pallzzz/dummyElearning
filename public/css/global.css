@@ -1,0 +1,79 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+     /* Colors */
+     --green-color: #19A89D;
+     --cream-color: #F0F2C3;
+     --grey-color: #5C5C5C;
+     --dark-color: #434242;
+     --black-color: black;
+     --white-color: white;
+ 
+     /* Font and Typography */
+     --font-poppins: "Poppins", sans-serif;
+ 
+     /* Font size */
+     --xxxl-font-size: 64px;
+     --xxl-font-size: 48px;
+     --xl-font-size: 40px;
+     --l-font-size: 24px;
+     --m-font-size: 20px;
+     --s-font-size: 16px;
+     --xs-font-size: 14px;
+     
+     /* Font weight */
+     --font-regular: 400;
+     --font-medium: 500;
+     --font-semibold: 600;
+     --font-bold: 700;
+     --font-extrabold: 800;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-poppins);
+    background-color: var(--white-color);
+    color: var(--black-color);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar{
+	width: 10px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: #FFF;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #CBCBCB;
+	outline: 2px solid #FFF;
+	outline-offset: -2px;
+	border: .1px solid #B7B7B7;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #909090;
+}
+
+/* biar footernya gk lari */
+main{
+    min-height: 92vh;
+}

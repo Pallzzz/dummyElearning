@@ -1,0 +1,121 @@
+:root {
+     /* Colors */
+     --green-color: #19A89D;
+     --cream-color: #F0F2C3;
+     --grey-color: #5C5C5C;
+     --dark-color: #434242;
+     --black-color: black;
+     --white-color: white;
+ 
+     /* Font and Typography */
+     --font-poppins: "Poppins", sans-serif;
+ 
+     /* Font size */
+     --xxxl-font-size: 64px;
+     --xxl-font-size: 48px;
+     --xl-font-size: 40px;
+     --l-font-size: 24px;
+     --m-font-size: 20px;
+     --s-font-size: 16px;
+     --xs-font-size: 14px;
+     
+     /* Font weight */
+     --font-regular: 400;
+     --font-medium: 500;
+     --font-semibold: 600;
+     --font-bold: 700;
+     --font-extrabold: 800;
+}
+
+.logo{
+    font-style: italic;
+    color: var(--primary-color);
+    font-weight: var(--font-extrabold);
+    font-size: var(--l-font-size);
+}
+
+.titlebox {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-weight: bold;
+    color: var(--text-gray);
+    font-size: 2.25rem;
+}
+
+.subtitle {
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.subtitle span {
+    color: var(--bslc-tosca);
+}
+
+/* .boxcontain {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    border-style: solid;
+    border-image: linear-gradient(to right, var(--green-color), var(--cream-color)) 1;
+    border-width: 1.2rem;
+    border-radius: 30px !important; 
+    padding: 2rem 4rem;
+    column-gap: 5rem;
+    width: max-content;
+    background: white;
+    background-clip: padding-box; 
+} */
+
+.boxcontain {
+    position: relative;
+    padding: 2rem 4rem;
+    margin-top: 3rem;
+    border-radius: 30px;
+    background: white; /* Background color of the element */
+    display: flex;
+    flex-direction: row;
+    column-gap: 5rem;
+    width: max-content;
+    margin-bottom: 100px;
+}
+
+.boxcontain:hover{
+    background: linear-gradient(to right, var(--green-color), var(--cream-color));
+}
+
+.boxcontain::before {
+    content: "";
+    position: absolute;
+    top: -0.6rem;
+    left: -0.6rem;
+    right: -0.6rem;
+    bottom: -0.6rem;
+    background: linear-gradient(to right, var(--green-color), var(--cream-color));
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.boxcontain span {
+    display: block;
+    font-weight: 500;
+}
+
+.boxcontain p {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--green-color);
+}
+
+.boxcontain span {
+    font-size: 1rem;
+    color: var(--grey-color);
+}
+
+/* select option {
+    background-color: red !important;
+    color: white!important;
+  } */
