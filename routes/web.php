@@ -28,11 +28,14 @@ Route::get('/{major:slug}', [CourseController::class, 'showCoursesBySlug']);
 Route::post('/ajaxCourse', [AjaxController::class, 'requestHandler']);
 
 //MODULE
-Route::post('/download_module', [ModuleController::class, 'download']);
+// AJAX routes
+Route::post('/ajaxCourse/fetchYears', [ModuleController::class, 'fetchYears'])->name('module.fetchYears');
+Route::post('/ajaxCourse/fetchExamTypes', [ModuleController::class, 'fetchExamTypes'])->name('module.fetchExamTypes');
+Route::post('/ajaxCourse/fetchModuleTypes', [ModuleController::class, 'fetchModuleTypes'])->name('module.fetchModuleTypes');
 
+// Download route
+Route::post('/download_module', [ModuleController::class, 'downloadModule'])->name('module.download');
 
-Route::get('/{major}/{course}/module', [ModuleController::class, 'index'])->name('module.index');
-Route::get('/module/download', [ModuleController::class, 'downloadModule'])->name('module.download');
 
 //HOME
 // Route::get('/{course:slug}', [CourseController::class,'searchCourse']);
