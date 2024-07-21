@@ -30,6 +30,9 @@
             <a href="#" style="text-decoration: none; color: #19A89D">Module {{ $course->name }}</a>
         </div>
 
+        @if($modules->isEmpty())
+            <p>No module found for the selected course.</p>
+        @else
         <h1>Download Module for {{ $course->name }}</h1>
         <form class="module" action="{{ route('module.download') }}" method="POST" target="_blank">
             @csrf
@@ -58,6 +61,7 @@
         
             <button class="btn btn-outline-primary" id="submitButton" disabled type="submit" style="margin-top: 20px">Download Module</button>
         </form>
+        @endif
     </main>
     {{-- select 2 --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>

@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
-    public function index(Major $major, Course $course)
-    {
-        return view('module', [
-            'major' => $major,
-            'course' => $course,
-            'years' => Module::where('course_id', $course->id)->distinct()->pluck('year')
-        ]);
-    }
+ public function index(Major $major, Course $course)
+{
+    $modules = Module::where('course_id', $course->id)->get();
+    return view('module', [
+        'title' => $course->name,
+        'major' => $major,
+        'course' => $course,
+        'modules' => $modules
+    ]);
+}
 
     public function fetchYears(Request $request)
     {
