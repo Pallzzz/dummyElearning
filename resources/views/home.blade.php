@@ -17,13 +17,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 </head>
 <body>
-    {{-- <nav class="navbar navbar-light bg-light">
-        <div class="container">
-          <a class="" href="#">
-            <img src="{{ asset('Logo.svg') }}" alt="" width="100" height="140">
-          </a>
-        </div>
-      </nav> --}}
     <nav class="navbar navbar-light bg-light">
       <div class="container">
         <span class="logo">E-LEARNING</span>
@@ -47,12 +40,13 @@
           <p>What faculty are you in?</p>
           <form class="search-form" action="{{ route('search.courses') }}" method="GET" >
             @csrf
-            <select name="major_id" class="$form-select" id="basic-usage" data-placeholder="Choose one thing">
+            <select name="major_id" class="$form-select" id="basic-usage">
+              <option value="">Choose Major</option>
               @foreach($majors as $majorItem)
               <option value="{{ $majorItem->id }}">{{ $majorItem->name }}</option>
               @endforeach
             </select>
-            <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+            <button type="submit" class="btn btn-secondary btn-sm" style="margin-top: 20px">Search</button>
           </form>
         </div>
       </section>

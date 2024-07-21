@@ -59,7 +59,7 @@
             <button class="btn btn-outline-primary" id="submitButton" disabled type="submit" style="margin-top: 20px">Download Module</button>
         </form>
     </main>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- select 2 --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
@@ -70,6 +70,8 @@
             placeholder: $( this ).data( 'placeholder' ),
         });
     </script>
+
+    {{-- JS --}}
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script>
         function generateYear() {
@@ -104,7 +106,7 @@
                     let examTypeSelect = $("#exam_type");
                     examTypeSelect.empty();
                     examTypeSelect.append('<option value="" selected hidden>Choose Exam Type</option>');
-                    $("#module_type").empty().append('<option value="" selected hidden>Choose</option>').attr('disabled', true);
+                    $("#module_type").empty().append('<option value="" selected hidden>Choose Module Type</option>').attr('disabled', true);
                     response.forEach(function(exam_type) {
                         examTypeSelect.append(`<option value='${exam_type}'>${exam_type}</option>`);
                     });
@@ -127,7 +129,7 @@
                 success: function(response) {
                     let moduleTypeSelect = $("#module_type");
                     moduleTypeSelect.empty();
-                    moduleTypeSelect.append('<option value="" selected hidden>Choose Modul Type</option>');
+                    moduleTypeSelect.append('<option value="" selected hidden>Choose Module Type</option>');
                     response.forEach(function(module_type) {
                         moduleTypeSelect.append(`<option value='${module_type}'>${module_type}</option>`);
                     });

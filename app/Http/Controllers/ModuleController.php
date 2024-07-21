@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
-    public function index(Request $request, Major $major, Course $course)
+    public function index(Major $major, Course $course)
     {
         return view('module', [
             'major' => $major,

@@ -24,9 +24,6 @@ Route::get('/{major:slug}/{course:slug}', [ModuleController::class, 'index']);
 //RUTE BREADCRUMB MODULE TO COURSE(MAJOR)
 Route::get('/{major:slug}', [CourseController::class, 'showCoursesBySlug']);
 
-//AJAX
-Route::post('/ajaxCourse', [AjaxController::class, 'requestHandler']);
-
 //MODULE
 // AJAX routes
 Route::post('/ajaxCourse/fetchYears', [ModuleController::class, 'fetchYears'])->name('module.fetchYears');
