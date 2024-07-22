@@ -17,11 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-      <div class="container">
-        <span class="logo">E-LEARNING</span>
-      </div>
-    </nav>
+    <x-nav></x-nav>
     <main class="container">
 
       <div class="left">
