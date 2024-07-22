@@ -2,7 +2,6 @@
 
 use App\Models\Major;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModuleController;
