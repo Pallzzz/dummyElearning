@@ -2,7 +2,6 @@
 
 use App\Models\Major;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModuleController;
@@ -24,15 +23,15 @@ Route::get('/{major:slug}/{course:slug}', [ModuleController::class, 'index']);
 //RUTE BREADCRUMB MODULE TO COURSE(MAJOR)
 Route::get('/{major:slug}', [CourseController::class, 'showCoursesBySlug']);
 
-//AJAX
-Route::post('/ajaxCourse', [AjaxController::class, 'requestHandler']);
-
 //MODULE
-Route::post('/download_module', [ModuleController::class, 'download']);
+// AJAX routes
+Route::post('/ajaxCourse/fetchYears', [ModuleController::class, 'fetchYears'])->name('module.fetchYears');
+Route::post('/ajaxCourse/fetchExamTypes', [ModuleController::class, 'fetchExamTypes'])->name('module.fetchExamTypes');
+Route::post('/ajaxCourse/fetchModuleTypes', [ModuleController::class, 'fetchModuleTypes'])->name('module.fetchModuleTypes');
 
+// Download route
+Route::post('/download_module', [ModuleController::class, 'downloadModule'])->name('module.download');
 
-Route::get('/{major}/{course}/module', [ModuleController::class, 'index'])->name('module.index');
-Route::get('/module/download', [ModuleController::class, 'downloadModule'])->name('module.download');
 
 //HOME
 // Route::get('/{course:slug}', [CourseController::class,'searchCourse']);

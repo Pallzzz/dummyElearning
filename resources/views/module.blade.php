@@ -30,41 +30,40 @@
             <a href="#" style="text-decoration: none; color: #19A89D">Module {{ $course->name }}</a>
         </div>
 
+        @if($modules->isEmpty())
+            <p>No module found for the selected course.</p>
+        @else
         <h1>Download Module for {{ $course->name }}</h1>
-        <form action="{{ route('module.index', ['major' => $major->slug, 'course' => $course->slug]) }}" method="GET">
+        <form class="module" action="{{ route('module.download') }}" method="POST" target="_blank">
             @csrf
             <input type="hidden" name="course_id" value="{{ $course->id }}">
-            
-            <label for="year">Year:</label>
-            <select name="year" id="year" class="form-select" onchange="this.form.submit()">
-                <option value="">Select Year</option>
-                @foreach($years as $year)
-                <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                @endforeach
-            </select>
-            <br>
-    
-            <label for="exam_type">Exam Type:</label>
-            <select name="exam_type" id="exam_type" class="form-select" onchange="this.form.submit()">
-                <option value="">Select Exam Type</option>
-                @foreach($exam_types as $examType)
-                <option value="{{ $examType }}" {{ request('exam_type') == $examType ? 'selected' : '' }}>{{ $examType }}</option>
-                @endforeach
-            </select>
-            <br>
-    
-            <label for="module_type">Module Type:</label>
-            <select name="module_type" id="module_type" class="form-select">
-                <option value="">Select Module Type</option>
-                @foreach($module_types as $moduleType)
-                <option value="{{ $moduleType }}">{{ $moduleType }}</option>
-                @endforeach
-            </select>
-            <br>
-
-            <button type="submit" formaction="{{ route('module.download') }}">Download Module</button>
+        
+            <div class="selections">
+                <div class="year_select">
+                    <h3>Year</h3>
+                    <select id="year" name="year" required onchange="generateExamTypes()" class="form-select" id="basic-usage">
+                        <option value="" selected hidden>Choose Year</option>
+                    </select>
+                </div>
+                <div class="exam_type_select">
+                    <h3>Exam Type</h3>
+                    <select id="exam_type" name="exam_type" required onchange="generateModuleType()" disabled class="form-select" id="basic-usage">
+                        <option value="" selected hidden>Choose Exam Type</option>
+                    </select>
+                </div>
+                <div class="module_type_select">
+                    <h3>Module Type</h3>
+                    <select id="module_type" name="module_type" required disabled onchange="enableDownload()" class="form-select" id="basic-usage">
+                        <option value="" selected hidden>Choose Module Type</option>
+                    </select>
+                </div>
+            </div>
+        
+            <button class="btn btn-outline-primary" id="submitButton" disabled type="submit" style="margin-top: 20px">Download Module</button>
         </form>
+        @endif
     </main>
+    {{-- select 2 --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
@@ -73,6 +72,82 @@
             theme: "bootstrap-5",
             width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
             placeholder: $( this ).data( 'placeholder' ),
+        });
+    </script>
+
+    {{-- JS --}}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        function generateYear() {
+            $.ajax({
+                url: "{{ route('module.fetchYears') }}",
+                method: 'POST',
+                data: {
+                    course_id: "{{ $course->id }}",
+                    _token: $('input[name="_token"]').val()
+                },
+                success: function(response) {
+                    let yearSelect = $("#year");
+                    yearSelect.empty();
+                    yearSelect.append('<option value="" selected hidden>Choose Year</option>');
+                    response.forEach(function(year) {
+                        yearSelect.append(`<option value='${year}'>${year}</option>`);
+                    });
+                }
+            });
+        }
+    
+        function generateExamTypes() {
+            $.ajax({
+                url: "{{ route('module.fetchExamTypes') }}",
+                method: 'POST',
+                data: {
+                    course_id: "{{ $course->id }}",
+                    year: $('#year').val(),
+                    _token: $('input[name="_token"]').val()
+                },
+                success: function(response) {
+                    let examTypeSelect = $("#exam_type");
+                    examTypeSelect.empty();
+                    examTypeSelect.append('<option value="" selected hidden>Choose Exam Type</option>');
+                    $("#module_type").empty().append('<option value="" selected hidden>Choose Module Type</option>').attr('disabled', true);
+                    response.forEach(function(exam_type) {
+                        examTypeSelect.append(`<option value='${exam_type}'>${exam_type}</option>`);
+                    });
+                    examTypeSelect.removeAttr('disabled');
+                    $("#submitButton").attr('disabled', true);
+                }
+            });
+        }
+    
+        function generateModuleType() {
+            $.ajax({
+                url: "{{ route('module.fetchModuleTypes') }}",
+                method: 'POST',
+                data: {
+                    course_id: "{{ $course->id }}",
+                    year: $('#year').val(),
+                    exam_type: $('#exam_type').val(),
+                    _token: $('input[name="_token"]').val()
+                },
+                success: function(response) {
+                    let moduleTypeSelect = $("#module_type");
+                    moduleTypeSelect.empty();
+                    moduleTypeSelect.append('<option value="" selected hidden>Choose Module Type</option>');
+                    response.forEach(function(module_type) {
+                        moduleTypeSelect.append(`<option value='${module_type}'>${module_type}</option>`);
+                    });
+                    moduleTypeSelect.removeAttr('disabled');
+                }
+            });
+        }
+    
+        function enableDownload() {
+            $("#submitButton").removeAttr('disabled');
+        }
+    
+        $(function() {
+            generateYear();
         });
     </script>
 </body>
