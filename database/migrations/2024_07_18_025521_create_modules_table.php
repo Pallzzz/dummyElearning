@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('exam_type');
             $table->string('module_type');
             $table->string('download_link');
+            $table->timestamps();
         });
     }
 

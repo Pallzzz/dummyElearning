@@ -26,10 +26,8 @@
         @else
             <h1>Courses</h1>
             @foreach($course as $courseList)
-                {{-- <div class="boxcontain">{{ $course->name }}</div> --}}
                 <a class="boxcontain" style="text-decoration: none" href="/{{ $major->slug }}/{{ $courseList->slug }}">
                     <p>{{ $courseList->name }}</p>
-                    {{-- <img src="assets/icons/next-arrow.svg" alt="next-arrow"> --}}
                 </a>
             @endforeach
         @endif
