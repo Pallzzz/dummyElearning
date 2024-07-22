@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('video_link')->nullable();
             $table->foreignId('major_id');
+            $table->timestamps();
         });
     }
 
